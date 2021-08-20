@@ -5,6 +5,8 @@ import six
 import numpy as np
 import cv2
 
+from keras.preprocessing.image import array_to_img, img_to_array, load_img
+
 try:
     from collections.abc import Sequence
 except ImportError:
@@ -212,8 +214,10 @@ def verify_segmentation_dataset(images_path, segs_path,
 
         return_value = True
         for im_fn, seg_fn in tqdm(img_seg_pairs):
-            img = cv2.imread(im_fn)/255
-            seg = cv2.imread(seg_fn)/255
+            #img = cv2.imread(im_fn)
+            #seg = cv2.imread(seg_fn)
+            img = img_to_array(cv2.imread(im_fn))/255
+            seg = img_to_array(cv2.imread(seg_fn))/255
             # Check dimensions match
             if not img.shape == seg.shape:
                 return_value = False
