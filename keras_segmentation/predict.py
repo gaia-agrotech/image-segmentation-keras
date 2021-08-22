@@ -14,6 +14,8 @@ from .data_utils.data_loader import get_image_array, get_segmentation_array,\
     DATA_LOADER_SEED, class_colors, get_pairs_from_paths
 from .models.config import IMAGE_ORDERING
 
+from keras.preprocessing.image import array_to_img, img_to_array, load_img
+
 
 random.seed(DATA_LOADER_SEED)
 
@@ -143,9 +145,10 @@ def predict(model=None, inp=None, out_fname=None,
         "Input should be the CV image or the input file name"
 
     if isinstance(inp, six.string_types):
-        inp = cv2.imread(inp, read_image_type)
+        inp = cv2.imread(inp, read_image_type)/255
+        #inp = img_to_array(load_img(inp, target_size = (128, 128), grayscale=True))/255.0
 
-    assert (len(inp.shape) == 3 or len(inp.shape) == 1 or len(inp.shape) == 4), "Image should be h,w,3 "
+    #assert (len(inp.shape) == 3 or len(inp.shape) == 1 or len(inp.shape) == 4), "Image should be h,w,3"
 
     output_width = model.output_width
     output_height = model.output_height
