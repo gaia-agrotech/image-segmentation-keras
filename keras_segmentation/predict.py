@@ -156,10 +156,9 @@ def predict(model=None, inp=None, out_fname=None,
     input_height = model.input_height
     n_classes = model.n_classes
 
-    #x = get_image_array(inp, input_width, input_height,
-    #                    ordering=IMAGE_ORDERING)
-    #pr = model.predict(np.array([x]))[0]
-    pr = model.predict(inp)
+    x = get_image_array(inp, input_width, input_height,
+                        ordering=IMAGE_ORDERING)
+    pr = model.predict(np.array([x]))[0]
     pr = pr.reshape((output_height,  output_width, n_classes)).argmax(axis=2)
 
     seg_img = visualize_segmentation(pr, inp, n_classes=n_classes,
