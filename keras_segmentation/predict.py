@@ -145,8 +145,8 @@ def predict(model=None, inp=None, out_fname=None,
         "Input should be the CV image or the input file name"
 
     if isinstance(inp, six.string_types):
-        inp = cv2.imread(inp, read_image_type)/255
-        #inp = img_to_array(load_img(inp, target_size = (128, 128), grayscale=True))/255.0
+        #inp = cv2.imread(inp, read_image_type)
+        inp = img_to_array(load_img(inp, target_size = (128, 128), grayscale=True))/255.0
 
     #assert (len(inp.shape) == 3 or len(inp.shape) == 1 or len(inp.shape) == 4), "Image should be h,w,3"
 
@@ -156,9 +156,10 @@ def predict(model=None, inp=None, out_fname=None,
     input_height = model.input_height
     n_classes = model.n_classes
 
-    x = get_image_array(inp, input_width, input_height,
-                        ordering=IMAGE_ORDERING)
-    pr = model.predict(np.array([x]))[0]
+    #x = get_image_array(inp, input_width, input_height,
+    #                    ordering=IMAGE_ORDERING)
+    #pr = model.predict(np.array([x]))[0]
+    pr = model.predict(inp)
     pr = pr.reshape((output_height,  output_width, n_classes)).argmax(axis=2)
 
     seg_img = visualize_segmentation(pr, inp, n_classes=n_classes,
