@@ -145,10 +145,9 @@ def predict(model=None, inp=None, out_fname=None,
         "Input should be the CV image or the input file name"
 
     if isinstance(inp, six.string_types):
-        #inp = cv2.imread(inp, read_image_type)
-        inp = img_to_array(load_img(inp, target_size = (128, 128), grayscale=True))/255.0
+        inp = cv2.imread(inp, read_image_type)
 
-    #assert (len(inp.shape) == 3 or len(inp.shape) == 1 or len(inp.shape) == 4), "Image should be h,w,3"
+    assert (len(inp.shape) == 3 or len(inp.shape) == 1 or len(inp.shape) == 4), "Image should be h,w,3"
 
     output_width = model.output_width
     output_height = model.output_height
