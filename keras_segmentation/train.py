@@ -78,6 +78,8 @@ def train(model,
           gen_use_multiprocessing=False,
           ignore_zero_class=False,
           optimizer_name='adam',
+          metric_name='accuracy',
+          loss_name='categorical_crossentropy'
           do_augment=False,
           augmentation_name="aug_all",
           callbacks=None,
@@ -112,13 +114,13 @@ def train(model,
     if optimizer_name is not None:
 
         if ignore_zero_class:
-            loss_k = masked_categorical_crossentropy
+            loss_name = masked_categorical_crossentropy
         else:
-            loss_k = 'categorical_crossentropy'
+            loss_name = 'categorical_crossentropy'
 
-        model.compile(loss=loss_k,
+        model.compile(loss=loss_name,
                       optimizer=optimizer_name,
-                      metrics=['accuracy'])
+                      metrics=metric_name)
 
     if checkpoints_path is not None:
         config_file = checkpoints_path + "_config.json"
