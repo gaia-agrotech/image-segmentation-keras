@@ -214,10 +214,8 @@ def verify_segmentation_dataset(images_path, segs_path,
 
         return_value = True
         for im_fn, seg_fn in tqdm(img_seg_pairs):
-            #img = cv2.imread(im_fn)
-            #seg = cv2.imread(seg_fn)
-            img = img_to_array(load_img(im_fn, target_size = (128, 128), grayscale=True))/255.0
-            seg = img_to_array(load_img(seg_fn, target_size = (128, 128), grayscale=True))/255.0
+            img = cv2.imread(im_fn)
+            seg = cv2.imread(seg_fn)
             # Check dimensions match
             if not img.shape == seg.shape:
                 return_value = False
