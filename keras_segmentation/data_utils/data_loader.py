@@ -5,8 +5,6 @@ import six
 import numpy as np
 import cv2
 
-from keras.preprocessing.image import array_to_img, img_to_array, load_img
-
 try:
     from collections.abc import Sequence
 except ImportError:
