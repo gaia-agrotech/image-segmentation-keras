@@ -79,7 +79,7 @@ def train(model,
           ignore_zero_class=False,
           optimizer_name='adam',
           metric_name='accuracy',
-          loss_name='categorical_crossentropy'
+          loss_name='categorical_crossentropy',
           do_augment=False,
           augmentation_name="aug_all",
           callbacks=None,
