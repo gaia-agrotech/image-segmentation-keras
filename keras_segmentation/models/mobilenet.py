@@ -71,7 +71,7 @@ def get_mobilenet_encoder(input_height=224, input_width=224,
 
     alpha = 1.0
     depth_multiplier = 1
-    dropout = 0
+    dropout = 1e-3
 
     img_input = Input(shape=(input_height, input_width, channels))
 
